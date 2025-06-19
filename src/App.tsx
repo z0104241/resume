@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
-type MenuType = "home" | "career" | "skills" | "edu" | "etc";
+// 메뉴 타입 정의
+export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
 
-interface ResumeSection {
+export interface ResumeSection {
   key: MenuType;
   title: string;
   content: string | JSX.Element;
+  details?: { label: string; content: string | JSX.Element }[];
 }
 
+// 메뉴/경력 상세 리스트 샘플
 const resumeSections: ResumeSection[] = [
   {
     key: "career",
@@ -25,6 +28,20 @@ const resumeSections: ResumeSection[] = [
         </li>
       </ul>
     ),
+    details: [
+      {
+        label: "상세 1: AI 서비스",
+        content: <div className="mt-2">AI 서비스 상세 설명입니다.</div>,
+      },
+      {
+        label: "상세 2: 대회 경험",
+        content: <div className="mt-2">대회 경험 상세 설명입니다.</div>,
+      },
+      {
+        label: "상세 3: 기타 프로젝트",
+        content: <div className="mt-2">기타 프로젝트 상세 설명입니다.</div>,
+      },
+    ],
   },
   {
     key: "skills",
@@ -65,7 +82,9 @@ const Sidebar: React.FC<{
   open: boolean;
   setOpen: (v: boolean) => void;
   sections: ResumeSection[];
-}> = ({ menu, setMenu, open, setOpen, sections }) =>
+  selectedDetail: number | null;
+  setSelectedDetail: (idx: number | null) => void;
+}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail }) =>
   open ? (
     <aside
       className="h-screen w-64 bg-white border-r shadow-xl flex flex-col pt-8 px-6 transition-all duration-300 z-10"
@@ -84,18 +103,39 @@ const Sidebar: React.FC<{
       <ul className="space-y-2 text-lg">
         <li
           className={`cursor-pointer hover:font-bold ${menu === "home" ? "font-bold text-blue-600" : ""}`}
-          onClick={() => setMenu("home")}
+          onClick={() => {
+            setMenu("home");
+            setSelectedDetail(null);
+          }}
         >
           프롬프트 Q&A
         </li>
         {sections.map((sec) => (
-          <li
-            key={sec.key}
-            className={`cursor-pointer hover:font-bold ${menu === sec.key ? "font-bold text-blue-600" : ""}`}
-            onClick={() => setMenu(sec.key)}
-          >
-            {sec.title}
-          </li>
+          <React.Fragment key={sec.key}>
+            <li
+              className={`cursor-pointer hover:font-bold ${menu === sec.key ? "font-bold text-blue-600" : ""}`}
+              onClick={() => {
+                setMenu(sec.key);
+                setSelectedDetail(null);
+              }}
+            >
+              {sec.title}
+            </li>
+            {/* 경력/프로젝트 상세 하위 메뉴 */}
+            {sec.key === "career" && menu === "career" && sec.details && (
+              <ul className="ml-4 space-y-1">
+                {sec.details.map((detail, idx) => (
+                  <li
+                    key={detail.label}
+                    className={`text-base cursor-pointer hover:underline pl-2 ${selectedDetail === idx ? "text-blue-600 font-semibold" : "text-gray-700"}`}
+                    onClick={() => setSelectedDetail(idx)}
+                  >
+                    {detail.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </React.Fragment>
         ))}
       </ul>
     </aside>
@@ -106,8 +146,8 @@ const App: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const [prompt, setPrompt] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
+  const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
 
-  // Q&A 요청
   async function handleQuery() {
     setAnswer("로딩 중...");
     try {
@@ -123,9 +163,8 @@ const App: React.FC = () => {
     }
   }
 
-  // 메인 중앙정렬: 사이드바 열려 있으면 왼쪽 여백, 닫히면 화면 100% 중앙
   return (
-    <div className="flex min-h-screen bg-gray-50 relative">
+    <div className="flex min-h-screen w-screen bg-gray-50 relative">
       {/* 사이드바 */}
       <Sidebar
         menu={menu}
@@ -133,6 +172,8 @@ const App: React.FC = () => {
         open={sidebarOpen}
         setOpen={setSidebarOpen}
         sections={resumeSections}
+        selectedDetail={selectedDetail}
+        setSelectedDetail={setSelectedDetail}
       />
       {/* 사이드바 닫힌 상태에서만 열기 버튼 노출 */}
       {!sidebarOpen && (
@@ -145,16 +186,10 @@ const App: React.FC = () => {
         </button>
       )}
       {/* 메인 콘텐츠 */}
-      <main
-        className={
-          sidebarOpen
-            ? "flex-1 flex justify-center items-center"
-            : "w-full flex justify-center items-center"
-        }
-      >
+      <main className="flex-1 flex items-center justify-center min-h-screen">
         <div className="w-full max-w-xl">
           {menu === "home" && (
-            <section className="flex flex-col items-center justify-center min-h-[60vh]">
+            <section>
               <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full">
                 <h1 className="text-3xl font-extrabold mb-8 text-center text-gray-800">
                   RAG 기반 이력서 Q&A
@@ -180,12 +215,17 @@ const App: React.FC = () => {
             </section>
           )}
           {menu !== "home" && (
-            <section className="flex flex-col items-center justify-center min-h-[60vh]">
+            <section>
               <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full">
                 <h2 className="text-2xl font-extrabold mb-4 text-center text-gray-700">
                   {resumeSections.find((sec) => sec.key === menu)?.title}
                 </h2>
-                <div>{resumeSections.find((sec) => sec.key === menu)?.content}</div>
+                {/* 경력/프로젝트의 상세 내용 */}
+                {menu === "career" && selectedDetail !== null
+                  ? resumeSections
+                      .find((sec) => sec.key === "career")!
+                      .details![selectedDetail].content
+                  : resumeSections.find((sec) => sec.key === menu)?.content}
               </div>
             </section>
           )}

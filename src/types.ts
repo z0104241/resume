@@ -1,8 +1,8 @@
-export interface MenuItem {
+export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
+
+export interface ResumeSection {
+  key: MenuType;
   title: string;
-  details: string[];
-}
-export interface SelectedMenu {
-  idx: number;
-  detail: number | null;
+  content: string | JSX.Element;
+  details?: { label: string; content: string | JSX.Element }[];
 }
