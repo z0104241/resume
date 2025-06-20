@@ -1,5 +1,7 @@
 export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
 
+export type ResumeDetail = { label: string; content: string | JSX.Element };
+
 export interface ResumeSection {
   key: MenuType;
   title: string;

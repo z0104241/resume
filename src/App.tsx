@@ -1,79 +1,26 @@
 import React, { useState } from "react";
+import careerSection from "./data/career";
+import skillsSection from "./data/skills";
+import eduSection from "./data/edu";
+import etcSection from "./data/etc";
+import type { ResumeSection, MenuType } from "./types"; 
+
 
 // 메뉴 타입 정의
-export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
+// export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
 
-export interface ResumeSection {
-  key: MenuType;
-  title: string;
-  content: string | JSX.Element;
-  details?: { label: string; content: string | JSX.Element }[];
-}
+// export interface ResumeSection {
+//   key: MenuType;
+//   title: string;
+//   content: string | JSX.Element;
+//   details?: { label: string; content: string | JSX.Element }[];
+// }
 
-// 메뉴/경력 상세 리스트 샘플
 const resumeSections: ResumeSection[] = [
-  {
-    key: "career",
-    title: "경력/프로젝트",
-    content: (
-      <ul className="list-disc ml-6 space-y-1">
-        <li>
-          <b>데이터분석, LLM 엔지니어</b> - 실무 및 대회 경험 다수
-        </li>
-        <li>
-          <b>프론트엔드 개발</b> - React 기반 웹 서비스 구현
-        </li>
-        <li>
-          <b>프로젝트:</b> 문장순서 예측, RAG 시스템, AI 서비스 개발 등
-        </li>
-      </ul>
-    ),
-    details: [
-      {
-        label: "상세 1: AI 서비스",
-        content: <div className="mt-2">AI 서비스 상세 설명입니다.</div>,
-      },
-      {
-        label: "상세 2: 대회 경험",
-        content: <div className="mt-2">대회 경험 상세 설명입니다.</div>,
-      },
-      {
-        label: "상세 3: 기타 프로젝트",
-        content: <div className="mt-2">기타 프로젝트 상세 설명입니다.</div>,
-      },
-    ],
-  },
-  {
-    key: "skills",
-    title: "주요 기술/스택",
-    content: (
-      <ul className="list-disc ml-6 space-y-1">
-        <li>Python (데이터/AI 전공), FastAPI, vLLM</li>
-        <li>React, TypeScript, Vite</li>
-        <li>Chroma/FAISS, Hugging Face</li>
-      </ul>
-    ),
-  },
-  {
-    key: "edu",
-    title: "학력/자격",
-    content: (
-      <ul className="list-disc ml-6 space-y-1">
-        <li>OO대학교 AI학과 졸업</li>
-        <li>정보처리기사, 빅데이터분석기사 등</li>
-      </ul>
-    ),
-  },
-  {
-    key: "etc",
-    title: "기타(수상/활동)",
-    content: (
-      <ul className="list-disc ml-6 space-y-1">
-        <li>AI 경진대회 입상</li>
-        <li>기술 블로그 운영</li>
-      </ul>
-    ),
-  },
+  careerSection,
+  skillsSection,
+  eduSection,
+  etcSection,
 ];
 
 const Sidebar: React.FC<{
