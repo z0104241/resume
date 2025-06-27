@@ -2,14 +2,14 @@
 
 const CareerTable = () => (
   <div className="overflow-x-auto">
-    <table className="min-w-[800px] w-full border border-gray-300 text-sm">
+    <table className="min-w-[400px] w-full border border-gray-300 text-sm">
       <thead>
         <tr className="bg-gray-200 text-gray-800">
           <th className="border px-2 py-2">사업명</th>
           <th className="border px-2 py-2">참여기간<br/>(년월 ~ 년월)</th>
           <th className="border px-2 py-2">담당업무</th>
           <th className="border px-2 py-2">발주처</th>
-          <th className="border px-2 py-2">비고</th>
+          <th className="border px-2 py-2 w-[50px] min-w-[20px]">비고</th>
         </tr>
       </thead>
       <tbody>

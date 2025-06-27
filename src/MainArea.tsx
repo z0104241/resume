@@ -1,5 +1,5 @@
 import React from "react";
-import type { MenuItem, SelectedMenu } from "./types";
+import type { MenuItem, SelectedMenu } from "./types.tsx";
 
 
 interface MainAreaProps {
@@ -10,13 +10,15 @@ interface MainAreaProps {
 const MainArea: React.FC<MainAreaProps> = ({ menu, selected }) => {
   const item = menu[selected.idx];
   if (!item) return null;
+  const detailItem = selected.detail !== null ? item.details?.[selected.detail] : null;
 
   return (
     <div className="main-content">
-      {selected.detail !== null ? (
+      {detailItem ? (
         <div>
-          <h2>{item.details[selected.detail]}</h2>
-          <div className="main-detail">이곳에 상세내용이 나옵니다.</div>
+          {/* 객체가 아닌, 객체의 'label'과 'content' 속성을 렌더링 */}
+          <h2>{detailItem.label}</h2>
+          <div className="main-detail">{detailItem.content}</div>
         </div>
       ) : (
         <h1>{item.title}</h1>

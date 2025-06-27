@@ -3,18 +3,7 @@ import careerSection from "./data/career";
 import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
 import etcSection from "./data/etc";
-import type { ResumeSection, MenuType } from "./types"; 
-
-
-// 메뉴 타입 정의
-// export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
-
-// export interface ResumeSection {
-//   key: MenuType;
-//   title: string;
-//   content: string | JSX.Element;
-//   details?: { label: string; content: string | JSX.Element }[];
-// }
+import type { ResumeSection, MenuType } from "./types.tsx"; 
 
 const resumeSections: ResumeSection[] = [
   careerSection,
