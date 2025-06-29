@@ -7,8 +7,10 @@ type MenuType = "home" | "career" | "skills" | "edu" | "etc";
 interface ResumeSection {
   key: MenuType;
   title: string;
-  content: string | JSX.Element;
-  details?: { label: string; content: string | JSX.Element }[];
+  // 'JSX.Element'를 'React.JSX.Element'로 수정
+  content: string | React.JSX.Element;
+  // 'JSX.Element'를 'React.JSX.Element'로 수정
+  details?: { label: string; content: string | React.JSX.Element }[];
 }
 
 const resumeSections: ResumeSection[] = [
@@ -141,6 +143,7 @@ const Sidebar: React.FC<{
     </aside>
   ) : null;
 
+// 이 파일이 App.tsx의 전체 내용일 경우를 대비하여 App 컴포넌트도 포함합니다.
 const App: React.FC = () => {
   const [menu, setMenu] = useState<MenuType>("home");
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);

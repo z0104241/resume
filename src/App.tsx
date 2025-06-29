@@ -3,7 +3,7 @@ import careerSection from "./data/career";
 import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
 import etcSection from "./data/etc";
-import type { ResumeSection, MenuType } from "./types.tsx"; 
+import type { ResumeSection, MenuType } from "./types"; 
 
 const resumeSections: ResumeSection[] = [
   careerSection,
