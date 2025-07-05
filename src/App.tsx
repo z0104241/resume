@@ -3,7 +3,9 @@ import careerSection from "./data/career";
 import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
 import etcSection from "./data/etc";
-import type { ResumeSection, MenuType } from "./types"; 
+import type { ResumeSection, MenuType } from "./types.tsx";
+// 분리된 HomePage 컴포넌트를 data 폴더에서 가져옵니다.
+import HomePage from './data/HomePage'; 
 
 const resumeSections: ResumeSection[] = [
   careerSection,
@@ -12,6 +14,7 @@ const resumeSections: ResumeSection[] = [
   etcSection,
 ];
 
+// Sidebar 컴포넌트는 App.tsx 내부에 그대로 유지합니다.
 const Sidebar: React.FC<{
   menu: MenuType;
   setMenu: (m: MenuType) => void;
@@ -57,7 +60,6 @@ const Sidebar: React.FC<{
             >
               {sec.title}
             </li>
-            {/* 경력/프로젝트 상세 하위 메뉴 */}
             {sec.key === "career" && menu === "career" && sec.details && (
               <ul className="ml-4 space-y-1">
                 {sec.details.map((detail, idx) => (
@@ -78,12 +80,14 @@ const Sidebar: React.FC<{
   ) : null;
 
 const App: React.FC = () => {
+  // Q&A 관련 상태(state)는 여전히 최상위 컴포넌트인 App.tsx에서 관리합니다.
   const [menu, setMenu] = useState<MenuType>("home");
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const [prompt, setPrompt] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
 
+  // 질문 처리 로직도 App.tsx에 유지합니다.
   async function handleQuery() {
     setAnswer("로딩 중...");
     try {
@@ -101,17 +105,17 @@ const App: React.FC = () => {
 
   return (
     <div className="flex min-h-screen w-screen bg-gray-50 relative">
-      {/* 사이드바 */}
       <Sidebar
         menu={menu}
         setMenu={setMenu}
         open={sidebarOpen}
+        // [수정됨] setOpen prop에 올바른 함수인 setSidebarOpen을 전달합니다.
         setOpen={setSidebarOpen}
         sections={resumeSections}
         selectedDetail={selectedDetail}
         setSelectedDetail={setSelectedDetail}
       />
-      {/* 사이드바 닫힌 상태에서만 열기 버튼 노출 */}
+      
       {!sidebarOpen && (
         <button
           className="fixed left-2 top-5 z-20 bg-gray-100 text-gray-700 rounded shadow px-3 py-2 hover:bg-blue-100 transition"
@@ -121,42 +125,25 @@ const App: React.FC = () => {
           <span className="text-xl">⏵</span>
         </button>
       )}
-      {/* 메인 콘텐츠 */}
+      
       <main className="flex-1 flex items-center justify-center min-h-screen">
         <div className="w-full max-w-xl">
-          {menu === "home" && (
-            <section>
-              <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full">
-                <h1 className="text-3xl font-extrabold mb-8 text-center text-gray-800">
-                  RAG 기반 이력서 Q&A
-                </h1>
-                <div className="flex gap-2 items-center justify-center mb-6">
-                  <input
-                    className="border p-3 rounded w-3/4"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="예) 주요 경력을 요약해줘"
-                  />
-                  <button
-                    className="px-5 py-3 bg-blue-600 text-white rounded shadow hover:bg-blue-700"
-                    onClick={handleQuery}
-                  >
-                    질문
-                  </button>
-                </div>
-                <div className="border rounded min-h-[3rem] p-4 bg-gray-50 text-gray-700">
-                  {answer}
-                </div>
-              </div>
-            </section>
-          )}
-          {menu !== "home" && (
+          {menu === "home" ? (
+            // 기존에 App.tsx에 있던 JSX 코드를 HomePage 컴포넌트로 대체합니다.
+            // Q&A 기능에 필요한 상태와 함수들을 props로 전달해줍니다.
+            <HomePage 
+              prompt={prompt}
+              setPrompt={setPrompt}
+              answer={answer}
+              handleQuery={handleQuery}
+            />
+          ) : (
+            // 다른 메뉴들은 기존 방식과 동일하게 렌더링합니다.
             <section>
               <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full">
                 <h2 className="text-2xl font-extrabold mb-4 text-center text-gray-700">
                   {resumeSections.find((sec) => sec.key === menu)?.title}
                 </h2>
-                {/* 경력/프로젝트의 상세 내용 */}
                 {menu === "career" && selectedDetail !== null
                   ? resumeSections
                       .find((sec) => sec.key === "career")!
