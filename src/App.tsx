@@ -4,9 +4,9 @@ import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
 import etcSection from "./data/etc";
 import type { ResumeSection, MenuType } from "./types.tsx";
-// 분리된 HomePage 컴포넌트를 data 폴더에서 가져옵니다.
 import HomePage from './data/HomePage'; 
 
+// 이력서 섹션 데이터
 const resumeSections: ResumeSection[] = [
   careerSection,
   skillsSection,
@@ -14,7 +14,7 @@ const resumeSections: ResumeSection[] = [
   etcSection,
 ];
 
-// Sidebar 컴포넌트는 App.tsx 내부에 그대로 유지합니다.
+// --- Sidebar 컴포넌트 ---
 const Sidebar: React.FC<{
   menu: MenuType;
   setMenu: (m: MenuType) => void;
@@ -23,137 +23,163 @@ const Sidebar: React.FC<{
   sections: ResumeSection[];
   selectedDetail: number | null;
   setSelectedDetail: (idx: number | null) => void;
-}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail }) =>
-  open ? (
+}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail }) => {
+  
+  const getMenuItemClass = (itemKey: MenuType) => 
+    `w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-base font-medium flex items-center space-x-3 ${
+      menu === itemKey 
+      ? 'bg-blue-600 text-white font-semibold shadow-md' 
+      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+    }`;
+
+  const getDetailItemClass = (index: number) => 
+    `w-full text-left pl-10 pr-4 py-2 rounded-md transition-colors duration-200 text-sm ${
+      selectedDetail === index
+      ? 'text-blue-600 font-bold'
+      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
+    }`;
+  
+  // 메뉴 아이템 클릭 시 항상 사이드바를 닫도록 수정
+  const handleMenuClick = (menuType: MenuType, detailIndex: number | null = null) => {
+    setMenu(menuType);
+    setSelectedDetail(detailIndex);
+    setOpen(false);
+  }
+
+  return (
+    // 사이드바를 항상 fixed로 설정하고, open 상태에 따라 translate-x로 제어
     <aside
-      className="h-screen w-64 bg-white border-r shadow-xl flex flex-col pt-8 px-6 transition-all duration-300 z-10"
-      style={{ minWidth: "16rem" }}
+      className={`h-screen w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 ease-in-out fixed z-30 ${open ? 'translate-x-0' : '-translate-x-full'}`}
+      style={{ minWidth: "18rem" }}
     >
-      <div className="flex items-center mb-10">
-        <span className="font-extrabold text-2xl flex-1 tracking-tight">이력서 메뉴</span>
+      <div className="flex items-center justify-between h-16 border-b border-slate-200 px-4">
+        <span className="font-bold text-xl text-slate-800 tracking-tight">Résumé Menu</span>
+        {/* 닫기 버튼은 모바일에서만 보이도록 유지 */}
         <button
-          className="text-gray-500 hover:text-black p-1 ml-2"
+          className="text-slate-500 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100 lg:hidden"
           onClick={() => setOpen(false)}
           title="사이드바 닫기"
         >
-          <span className="text-2xl">⏴</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
-      <ul className="space-y-2 text-lg">
-        <li
-          className={`cursor-pointer hover:font-bold ${menu === "home" ? "font-bold text-blue-600" : ""}`}
-          onClick={() => {
-            setMenu("home");
-            setSelectedDetail(null);
-          }}
-        >
-          프롬프트 Q&A
-        </li>
+      <nav className="flex-1 p-4 space-y-1.5">
+        <button className={getMenuItemClass("home")} onClick={() => handleMenuClick("home")}>
+          프로필 및 Q&A
+        </button>
         {sections.map((sec) => (
-          <React.Fragment key={sec.key}>
-            <li
-              className={`cursor-pointer hover:font-bold ${menu === sec.key ? "font-bold text-blue-600" : ""}`}
-              onClick={() => {
-                setMenu(sec.key);
-                setSelectedDetail(null);
-              }}
-            >
+          <div key={sec.key}>
+            <button className={getMenuItemClass(sec.key)} onClick={() => handleMenuClick(sec.key)}>
               {sec.title}
-            </li>
+            </button>
             {sec.key === "career" && menu === "career" && sec.details && (
-              <ul className="ml-4 space-y-1">
+              <div className="mt-2 space-y-1">
                 {sec.details.map((detail, idx) => (
-                  <li
-                    key={detail.label}
-                    className={`text-base cursor-pointer hover:underline pl-2 ${selectedDetail === idx ? "text-blue-600 font-semibold" : "text-gray-700"}`}
-                    onClick={() => setSelectedDetail(idx)}
-                  >
+                  <button key={detail.label} className={getDetailItemClass(idx)} onClick={() => handleMenuClick(sec.key, idx)}>
                     {detail.label}
-                  </li>
+                  </button>
                 ))}
-              </ul>
+              </div>
             )}
-          </React.Fragment>
+          </div>
         ))}
-      </ul>
+      </nav>
     </aside>
-  ) : null;
+  );
+};
 
+// --- 메인 App 컴포넌트 ---
 const App: React.FC = () => {
-  // Q&A 관련 상태(state)는 여전히 최상위 컴포넌트인 App.tsx에서 관리합니다.
-  const [menu, setMenu] = useState<MenuType>("home");
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  // 사이드바의 초기 상태를 false(닫힘)로 설정
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
-
-  // 질문 처리 로직도 App.tsx에 유지합니다.
+  const [menu, setMenu] = useState<MenuType>("home");
+  
   async function handleQuery() {
-    setAnswer("로딩 중...");
+    if (!prompt.trim()) {
+      setAnswer("질문을 입력해주세요.");
+      return;
+    }
+    setAnswer("AI가 답변을 생성 중입니다...");
     try {
       const res = await fetch("http://localhost:3001/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
       });
+      if (!res.ok) throw new Error(`서버 오류: ${res.statusText}`);
       const data = await res.json();
       setAnswer(data.answer);
     } catch (e) {
-      setAnswer("서버 응답 실패");
+      console.error(e);
+      setAnswer("서버 연결에 실패했습니다. 로컬 개발 환경인지 확인해주세요.");
     }
   }
 
+  const getCurrentTitle = () => {
+    if (menu === 'home') return '프로필 및 Q&A';
+    const section = resumeSections.find(sec => sec.key === menu);
+    if (section && menu === 'career' && selectedDetail !== null) {
+      return section.details?.[selectedDetail]?.label || section.title;
+    }
+    return section?.title || '';
+  }
+
   return (
-    <div className="flex min-h-screen w-screen bg-gray-50 relative">
+    <div className="bg-slate-50 min-h-screen">
       <Sidebar
         menu={menu}
         setMenu={setMenu}
         open={sidebarOpen}
-        // [수정됨] setOpen prop에 올바른 함수인 setSidebarOpen을 전달합니다.
         setOpen={setSidebarOpen}
         sections={resumeSections}
         selectedDetail={selectedDetail}
         setSelectedDetail={setSelectedDetail}
       />
       
-      {!sidebarOpen && (
-        <button
-          className="fixed left-2 top-5 z-20 bg-gray-100 text-gray-700 rounded shadow px-3 py-2 hover:bg-blue-100 transition"
-          onClick={() => setSidebarOpen(true)}
-          title="사이드바 열기"
-        >
-          <span className="text-xl">⏵</span>
-        </button>
-      )}
+      {/* 사이드바가 열렸을 때 화면 전체에 오버레이 표시 */}
+      {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-20" onClick={() => setSidebarOpen(false)}></div>}
       
-      <main className="flex-1 flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-xl">
-          {menu === "home" ? (
-            // 기존에 App.tsx에 있던 JSX 코드를 HomePage 컴포넌트로 대체합니다.
-            // Q&A 기능에 필요한 상태와 함수들을 props로 전달해줍니다.
-            <HomePage 
-              prompt={prompt}
-              setPrompt={setPrompt}
-              answer={answer}
-              handleQuery={handleQuery}
-            />
-          ) : (
-            // 다른 메뉴들은 기존 방식과 동일하게 렌더링합니다.
-            <section>
-              <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full">
-                <h2 className="text-2xl font-extrabold mb-4 text-center text-gray-700">
-                  {resumeSections.find((sec) => sec.key === menu)?.title}
-                </h2>
-                {menu === "career" && selectedDetail !== null
-                  ? resumeSections
-                      .find((sec) => sec.key === "career")!
-                      .details![selectedDetail].content
-                  : resumeSections.find((sec) => sec.key === menu)?.content}
+      {/* 메인 컨텐츠 영역: 더 이상 사이드바에 의해 밀려나지 않음 */}
+      <div className="flex flex-col flex-1">
+        <header className="flex items-center justify-between p-4 bg-white/70 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-10 h-16">
+            <div className="flex items-center gap-2">
+              <button
+                className="text-slate-600 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                title="메뉴 토글"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <h1 className="text-lg font-bold text-slate-800">{getCurrentTitle()}</h1>
+            </div>
+        </header>
+
+        <main className="flex-1 p-4 sm:p-6 md:p-8">
+            {menu === "home" ? (
+              <HomePage 
+                prompt={prompt}
+                setPrompt={setPrompt}
+                answer={answer}
+                handleQuery={handleQuery}
+              />
+            ) : (
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 w-full max-w-4xl mx-auto">
+                <div className="prose prose-lg max-w-none prose-slate">
+                  {menu === "career" && selectedDetail !== null
+                    ? resumeSections.find((sec) => sec.key === "career")!.details![selectedDetail].content
+                    : resumeSections.find((sec) => sec.key === menu)?.content}
+                </div>
               </div>
-            </section>
-          )}
-        </div>
-      </main>
+            )}
+        </main>
+      </div>
     </div>
   );
 };
