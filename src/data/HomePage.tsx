@@ -17,9 +17,9 @@ const HomePage: React.FC<HomePageProps> = ({
 }) => {
   // 개인 정보
   const personalInfo = {
-    name: '홍길동',
-    email: 'gildong.hong@example.com',
-    phone: '010-1234-5678',
+    name: '전재현',
+    email: 'z0108174@gmail.com',
+    phone: '010-4241-4445',
     // 중요: 이 이미지를 표시하려면 프로젝트 루트의 'public' 폴더에 'face.jpg' 파일을 넣어주세요.
     // 파일이 없는 경우 아래의 placeholder 이미지가 표시됩니다.
     profileImage: '/face.jpg', 

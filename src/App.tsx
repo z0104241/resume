@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import careerSection from "./data/career";
 import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
@@ -23,7 +23,9 @@ const Sidebar: React.FC<{
   sections: ResumeSection[];
   selectedDetail: number | null;
   setSelectedDetail: (idx: number | null) => void;
-}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail }) => {
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail, onMouseEnter, onMouseLeave }) => {
   
   const getMenuItemClass = (itemKey: MenuType) => 
     `w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-base font-medium flex items-center space-x-3 ${
@@ -39,7 +41,6 @@ const Sidebar: React.FC<{
       : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
     }`;
   
-  // 메뉴 아이템 클릭 시 항상 사이드바를 닫도록 수정
   const handleMenuClick = (menuType: MenuType, detailIndex: number | null = null) => {
     setMenu(menuType);
     setSelectedDetail(detailIndex);
@@ -47,14 +48,14 @@ const Sidebar: React.FC<{
   }
 
   return (
-    // 사이드바를 항상 fixed로 설정하고, open 상태에 따라 translate-x로 제어
     <aside
       className={`h-screen w-72 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 ease-in-out fixed z-30 ${open ? 'translate-x-0' : '-translate-x-full'}`}
       style={{ minWidth: "18rem" }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="flex items-center justify-between h-16 border-b border-slate-200 px-4">
         <span className="font-bold text-xl text-slate-800 tracking-tight">Résumé Menu</span>
-        {/* 닫기 버튼은 모바일에서만 보이도록 유지 */}
         <button
           className="text-slate-500 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100 lg:hidden"
           onClick={() => setOpen(false)}
@@ -92,13 +93,38 @@ const Sidebar: React.FC<{
 
 // --- 메인 App 컴포넌트 ---
 const App: React.FC = () => {
-  // 사이드바의 초기 상태를 false(닫힘)로 설정
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
   const [menu, setMenu] = useState<MenuType>("home");
+
+  // 사이드바 닫기 지연을 위한 타이머 참조
+  const leaveTimeout = useRef<number | null>(null);
+
+  // 마우스가 사이드바 또는 트리거 영역에 들어왔을 때 실행
+  const handleMouseEnter = () => {
+    if (leaveTimeout.current) {
+      clearTimeout(leaveTimeout.current);
+    }
+    setSidebarOpen(true);
+  };
+
+  // 마우스가 사이드바 또는 트리거 영역에서 나갔을 때 실행
+  const handleMouseLeave = () => {
+    leaveTimeout.current = window.setTimeout(() => {
+      setSidebarOpen(false);
+    }, 200); // 0.2초 후에 닫힘
+  };
   
+  // 햄버거 버튼 클릭 시 실행
+  const handleToggleClick = () => {
+    if (leaveTimeout.current) {
+      clearTimeout(leaveTimeout.current);
+    }
+    setSidebarOpen(!sidebarOpen);
+  };
+
   async function handleQuery() {
     if (!prompt.trim()) {
       setAnswer("질문을 입력해주세요.");
@@ -131,6 +157,13 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-slate-50 min-h-screen">
+      {/* 마우스 호버로 사이드바를 열기 위한 트리거 영역 */}
+      <div 
+        className="fixed top-0 left-0 h-full w-20 z-20"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      />
+
       <Sidebar
         menu={menu}
         setMenu={setMenu}
@@ -139,18 +172,16 @@ const App: React.FC = () => {
         sections={resumeSections}
         selectedDetail={selectedDetail}
         setSelectedDetail={setSelectedDetail}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
       
-      {/* 사이드바가 열렸을 때 화면 전체에 오버레이 표시 */}
-      {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-20" onClick={() => setSidebarOpen(false)}></div>}
-      
-      {/* 메인 컨텐츠 영역: 더 이상 사이드바에 의해 밀려나지 않음 */}
       <div className="flex flex-col flex-1">
         <header className="flex items-center justify-between p-4 bg-white/70 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-10 h-16">
             <div className="flex items-center gap-2">
               <button
                 className="text-slate-600 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100"
-                onClick={() => setSidebarOpen(!sidebarOpen)}
+                onClick={handleToggleClick}
                 title="메뉴 토글"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
