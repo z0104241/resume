@@ -25,7 +25,9 @@ const Sidebar: React.FC<{
   setSelectedDetail: (idx: number | null) => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
-}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail, onMouseEnter, onMouseLeave }) => {
+  isPinned: boolean;
+  onPinToggle: () => void;
+}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail, onMouseEnter, onMouseLeave, isPinned, onPinToggle }) => {
   
   const getMenuItemClass = (itemKey: MenuType) => 
     `w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-base font-medium flex items-center space-x-3 ${
@@ -44,7 +46,10 @@ const Sidebar: React.FC<{
   const handleMenuClick = (menuType: MenuType, detailIndex: number | null = null) => {
     setMenu(menuType);
     setSelectedDetail(detailIndex);
-    setOpen(false);
+    // 고정되지 않은 상태에서만 메뉴 클릭 시 사이드바 닫기
+    if (!isPinned) {
+      setOpen(false);
+    }
   }
 
   return (
@@ -57,13 +62,20 @@ const Sidebar: React.FC<{
       <div className="flex items-center justify-between h-16 border-b border-slate-200 px-4">
         <span className="font-bold text-xl text-slate-800 tracking-tight">Résumé Menu</span>
         <button
-          className="text-slate-500 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100 lg:hidden"
-          onClick={() => setOpen(false)}
-          title="사이드바 닫기"
+          className={`p-2 rounded-full transition-colors ${isPinned ? 'text-blue-600 bg-blue-100' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}`}
+          onClick={onPinToggle}
+          title={isPinned ? "사이드바 고정 해제" : "사이드바 고정"}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          {/* 고정 상태에 따라 세련된 북마크 아이콘으로 변경 */}
+          {isPinned ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.5 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+            </svg>
+          )}
         </button>
       </div>
       <nav className="flex-1 p-4 space-y-1.5">
@@ -94,35 +106,43 @@ const Sidebar: React.FC<{
 // --- 메인 App 컴포넌트 ---
 const App: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [isPinned, setIsPinned] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
   const [menu, setMenu] = useState<MenuType>("home");
 
-  // 사이드바 닫기 지연을 위한 타이머 참조
   const leaveTimeout = useRef<number | null>(null);
 
-  // 마우스가 사이드바 또는 트리거 영역에 들어왔을 때 실행
   const handleMouseEnter = () => {
+    if (isPinned) return;
     if (leaveTimeout.current) {
       clearTimeout(leaveTimeout.current);
     }
     setSidebarOpen(true);
   };
 
-  // 마우스가 사이드바 또는 트리거 영역에서 나갔을 때 실행
   const handleMouseLeave = () => {
+    if (isPinned) return;
     leaveTimeout.current = window.setTimeout(() => {
       setSidebarOpen(false);
-    }, 200); // 0.2초 후에 닫힘
+    }, 200);
   };
   
-  // 햄버거 버튼 클릭 시 실행
   const handleToggleClick = () => {
+    if (isPinned) return; // 고정 상태에서는 햄버거 버튼이 동작하지 않음
     if (leaveTimeout.current) {
       clearTimeout(leaveTimeout.current);
     }
     setSidebarOpen(!sidebarOpen);
+  };
+  
+  const handlePinToggle = () => {
+    setIsPinned(!isPinned);
+    // 고정될 때 사이드바가 항상 열려 있도록 보장
+    if (!isPinned) {
+      setSidebarOpen(true);
+    }
   };
 
   async function handleQuery() {
@@ -156,10 +176,9 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen">
-      {/* 마우스 호버로 사이드바를 열기 위한 트리거 영역 */}
+    <div className="bg-slate-50 min-h-screen relative">
       <div 
-        className="fixed top-0 left-0 h-full w-20 z-20"
+        className="fixed top-0 left-0 h-full w-12 z-20"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
@@ -167,22 +186,26 @@ const App: React.FC = () => {
       <Sidebar
         menu={menu}
         setMenu={setMenu}
-        open={sidebarOpen}
+        open={sidebarOpen || isPinned} // 고정 상태일 때 항상 열림
         setOpen={setSidebarOpen}
         sections={resumeSections}
         selectedDetail={selectedDetail}
         setSelectedDetail={setSelectedDetail}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        isPinned={isPinned}
+        onPinToggle={handlePinToggle}
       />
       
-      <div className="flex flex-col flex-1">
+      {/* 메인 컨텐츠 영역: 고정 상태에 따라 왼쪽 마진 조절 */}
+      <div className={`flex flex-col flex-1 transition-all duration-300 ease-in-out ${isPinned ? 'lg:ml-72' : ''}`}>
         <header className="flex items-center justify-between p-4 bg-white/70 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-10 h-16">
             <div className="flex items-center gap-2">
               <button
                 className="text-slate-600 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100"
                 onClick={handleToggleClick}
                 title="메뉴 토글"
+                disabled={isPinned} // 고정 상태일 때 비활성화
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />

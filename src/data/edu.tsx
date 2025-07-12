@@ -6,8 +6,8 @@ const eduSection: ResumeSection = {
   title: "학력/자격",
   content: (
     <ul className="list-disc ml-6 space-y-1">
-      <li>OO대학교 AI학과 졸업</li>
-      <li>정보처리기사, 빅데이터분석기사 등</li>
+      <li>인천대학교 산업경영공학과 졸업</li>
+      <li>빅데이터분석기사 취득</li>
     </ul>
   ),
 };
