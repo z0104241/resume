@@ -5,6 +5,7 @@ import eduSection from "./data/edu";
 import etcSection from "./data/etc";
 import type { ResumeSection, MenuType } from "./types.tsx";
 import HomePage from './data/HomePage'; 
+import WelcomeAnimation from './WelcomeAnimation'; // 새로 만든 WelcomeAnimation 컴포넌트를 가져옵니다.
 
 // 이력서 섹션 데이터
 const resumeSections: ResumeSection[] = [
@@ -46,7 +47,6 @@ const Sidebar: React.FC<{
   const handleMenuClick = (menuType: MenuType, detailIndex: number | null = null) => {
     setMenu(menuType);
     setSelectedDetail(detailIndex);
-    // 고정되지 않은 상태에서만 메뉴 클릭 시 사이드바 닫기
     if (!isPinned) {
       setOpen(false);
     }
@@ -66,7 +66,6 @@ const Sidebar: React.FC<{
           onClick={onPinToggle}
           title={isPinned ? "사이드바 고정 해제" : "사이드바 고정"}
         >
-          {/* 고정 상태에 따라 세련된 북마크 아이콘으로 변경 */}
           {isPinned ? (
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
@@ -105,6 +104,8 @@ const Sidebar: React.FC<{
 
 // --- 메인 App 컴포넌트 ---
 const App: React.FC = () => {
+  // 환영 애니메이션 표시 여부를 제어하는 상태를 추가합니다.
+  const [showWelcome, setShowWelcome] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [isPinned, setIsPinned] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
@@ -130,7 +131,7 @@ const App: React.FC = () => {
   };
   
   const handleToggleClick = () => {
-    if (isPinned) return; // 고정 상태에서는 햄버거 버튼이 동작하지 않음
+    if (isPinned) return;
     if (leaveTimeout.current) {
       clearTimeout(leaveTimeout.current);
     }
@@ -139,7 +140,6 @@ const App: React.FC = () => {
   
   const handlePinToggle = () => {
     setIsPinned(!isPinned);
-    // 고정될 때 사이드바가 항상 열려 있도록 보장
     if (!isPinned) {
       setSidebarOpen(true);
     }
@@ -175,6 +175,11 @@ const App: React.FC = () => {
     return section?.title || '';
   }
 
+  // 환영 애니메이션이 활성화 상태이면 애니메이션 컴포넌트를 렌더링합니다.
+  if (showWelcome) {
+    return <WelcomeAnimation onAnimationEnd={() => setShowWelcome(false)} />;
+  }
+
   return (
     <div className="bg-slate-50 min-h-screen relative">
       <div 
@@ -186,7 +191,7 @@ const App: React.FC = () => {
       <Sidebar
         menu={menu}
         setMenu={setMenu}
-        open={sidebarOpen || isPinned} // 고정 상태일 때 항상 열림
+        open={sidebarOpen || isPinned}
         setOpen={setSidebarOpen}
         sections={resumeSections}
         selectedDetail={selectedDetail}
@@ -197,7 +202,6 @@ const App: React.FC = () => {
         onPinToggle={handlePinToggle}
       />
       
-      {/* 메인 컨텐츠 영역: 고정 상태에 따라 왼쪽 마진 조절 */}
       <div className={`flex flex-col flex-1 transition-all duration-300 ease-in-out ${isPinned ? 'lg:ml-72' : ''}`}>
         <header className="flex items-center justify-between p-4 bg-white/70 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-10 h-16">
             <div className="flex items-center gap-2">
@@ -205,7 +209,7 @@ const App: React.FC = () => {
                 className="text-slate-600 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100"
                 onClick={handleToggleClick}
                 title="메뉴 토글"
-                disabled={isPinned} // 고정 상태일 때 비활성화
+                disabled={isPinned}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
