@@ -1,0 +1,19 @@
+#AWS SDK
+boto3
+
+#OpenAI 모델 연동
+openai
+
+#LangChain 핵심 프레임워크 및 OpenAI 연동 모듈
+langchain
+langchain-openai
+
+#LangChain에서 FAISS 벡터 저장소를 사용하기 위한 라이브러리
+faiss-cpu는 CPU 환경용입니다.
+faiss-cpu
+
+#LangChain 커뮤니티에서 제공하는 추가 기능 (FAISS 등)
+langchain-community
+
+#벡터 계산에 필요한 numpy (FAISS의 의존성)
+numpy

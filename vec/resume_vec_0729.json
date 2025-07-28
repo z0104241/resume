@@ -1,0 +1,222 @@
+[
+
+  {
+    "id": "undergrad_01",
+    "text": "대학교 졸업작품으로 '배달 플랫폼 리뷰 데이터 분석' 프로젝트를 수행했습니다. Selenium으로 데이터를 수집하고, Konlpy와 TF-IDF로 전처리한 뒤, DNN 모델을 활용하여 리뷰의 긍정/부정을 분류하여 별점 시스템의 신뢰도를 개선했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "배달 플랫폼 리뷰 데이터 분석",
+      "category": "개인 역량 강화",
+      "type": "학부 프로젝트",
+      "start_date": "2021-03-01",
+      "end_date": "2021-07-31",
+      "skills": ["Crawling", "Selenium", "Konlpy", "TF-IDF", "DNN", "Text-Mining"],
+      "achievement": "졸업작품 2위"
+    }
+  },
+  {
+    "id": "intern_01",
+    "text": "공공빅데이터 청년인턴십 과정에서, 공공데이터와 지리정보를 활용하여 서울시 노인복지시설 및 서대문구 여성안심 택배함의 최적 추가 설치 입지를 분석하는 프로젝트들을 수행했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "공공빅데이터 청년인턴십",
+      "category": "개인 역량 강화",
+      "type": "인턴십",
+      "start_date": "2021-08-01",
+      "end_date": "2022-02-28",
+      "skills": ["GIS", "Public Data", "Location Analysis", "Regression"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "marine_01",
+    "text": "해양수산부의 '수산자원 증대사업 효과분석' 사업에서, 계절성을 고려한 시계열 모델인 SARIMA와 딥러닝 모델인 LSTM을 활용하여 수산자원 조성사업의 어획량 증가 효과를 분석하고 예측했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "수산자원 증대사업 효과분석",
+      "category": "회사 업무",
+      "type": "고객사 SI",
+      "start_date": "2022-06-01",
+      "end_date": "2022-12-31",
+      "skills": ["SARIMA", "LSTM", "Time-Series", "Forecasting"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "paper_01",
+    "text": "재직 중 주말 AI 스터디 활동을 통해, StyleGAN2-ADA와 Layer Swapping 기법을 활용한 이미지 생성 모델에 관한 연구를 진행했으며, 이를 논문으로 제출하여 한국소프트웨어종합학술대회에서 장려상을 수상했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Cartoon Face Generation 연구",
+      "category": "개인 역량 강화",
+      "type": "학술 활동",
+      "start_date": "2022-09-01",
+      "end_date": "2022-11-30",
+      "skills": ["StyleGAN", "Image Generation", "Paper", "PyTorch"],
+      "achievement": "장려상"
+    }
+  },
+
+  {
+    "id": "dtaq_env_01",
+    "text": "국방기술품질원 상주 사업은 인터넷이 차단된 국방 내부망 환경에서 진행되었습니다. 저는 주어진 내부 분석 서버에 직접 Ubuntu OS를 설치하고 SSH로 원격 접속하는 분석 환경을 구축하며 프로젝트를 수행하는 등, 제한된 환경에서의 높은 기술적 자립심과 문제 해결 능력을 갖추고 있습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "국방기술품질원 상주 사업",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "분석 환경 구축",
+      "start_date": "2023-02-01",
+      "end_date": "2024-02-29",
+      "skills": ["Linux", "Ubuntu", "Server Setup", "SSH", "Security"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "dtaq_poc_01",
+    "text": "첫 번째 사업이었던 '품보형태 자동 추천' 개념검증(PoC) 프로젝트에서, 군집분류와 지수평활법을 활용하여 신규 군수품의 품질보증 형태를 예측하는 모델을 개발했습니다. 이 과정에서 발생하는 여러 제한사항에 유연하게 대처하며 과제의 방향성을 성공적으로 수정하여 완수했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "품보형태 자동 추천",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "개념검증(PoC) 및 모델링",
+      "start_date": "2023-02-01",
+      "end_date": "2023-06-30",
+      "skills": ["PoC", "Clustering", "Time-Series", "Forecasting"],
+      "achievement": "개념검증 성공"
+    }
+  },
+  {
+    "id": "dtaq_main_01",
+    "text": "두 번째 사업인 '동일/유사무기 체계 분석' 프로젝트에서는, 무기체계 데이터의 계층적 특성을 반영하는 Node2Vec과 텍스트의 의미적 유사도를 추출하는 KR-SBERT를 함께 활용하는 복합적인 모델을 설계하고 개발했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "동일/유사무기 체계 분석",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "핵심 분석 모델",
+      "start_date": "2023-09-01",
+      "end_date": "2024-02-29",
+      "skills": ["Node2Vec", "KR-SBERT", "Graph-Embedding", "NLP", "Hybrid Model"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "dtaq_main_02",
+    "text": "'동일/유사무기 체계 분석' 프로젝트의 결과를 데이터 마트로 구축하고, 새로운 데이터 입력 시 모델과 데이터 마트가 자동으로 업데이트되도록 프로그래밍하여 운영 효율성을 높였습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "동일/유사무기 체계 분석",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "MLOps 및 자동화",
+      "start_date": "2023-09-01",
+      "end_date": "2024-02-29",
+      "skills": ["MLOps", "Data Mart", "Automation", "Pipeline"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "manufacturing_01",
+    "text": "제조업 사기업의 'AI 내재화' 사업에서, 데이터 부족으로 다중 클래스 예측이 어렵다고 판단하여, '최근접 이웃(Nearest Neighbor)' 알고리즘을 활용한 사출 조건 추천 모델로 과제 방향을 재설계하고 제안했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "AI 내재화 사업",
+      "category": "회사 업무",
+      "type": "고객사 솔루션",
+      "start_date": "2024-07-01",
+      "end_date": "2024-12-31",
+      "skills": ["Problem Solving", "KNN", "Recommendation"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "dacon_kobert_01",
+    "text": "`transformers` 라이브러리를 통해 `skt/kobert-base-v1` 모델을 불러온 뒤, `BERTClassifier` 클래스에서 이 모델을 기반으로 분류 레이어를 추가하여 Fine-tuning을 수행했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "모델 아키텍처",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": ["KoBERT", "Fine-tuning", "PyTorch", "transformers"],
+      "achievement": "1위"
+    }
+  },
+  {
+    "id": "dacon_kobert_02",
+    "text": "데이터의 클래스 불균형 문제를 해결하기 위해, `scikit-learn`의 `compute_class_weight` 함수를 사용하여 클래스별 가중치를 생성하고, 이를 손실 함수에 전달하여 모델이 모든 클래스를 균형 있게 학습하도록 도왔습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "데이터 중심 AI 전략",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": ["Data-Centric AI", "Class Imbalance", "scikit-learn"],
+      "achievement": "1위"
+    }
+  },
+  {
+    "id": "mindchaser_01",
+    "text": "자사 인적성 검사 서비스 'MindchaserAI' 개발 시, 서비스의 근간이 되는 데이터 모델을 설계하고 컬럼 및 PK를 설정하는 등 데이터베이스 초기 기획을 주도했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "MindchaserAI 개발 참여",
+      "category": "회사 업무",
+      "type": "사내 솔루션",
+      "start_date": "2025-01-01",
+      "end_date": "2025-05-31",
+      "skills": ["DB Design", "Data Modeling"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "mindchaser_02",
+    "text": "'MindchaserAI' 서비스에서, 인적성 검사의 가중치 산출 모델 개발에 참여했으며, FastAPI를 사용하여 모델을 서빙하는 API 엔드포인트를 직접 작성했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "MindchaserAI 개발 참여",
+      "category": "회사 업무",
+      "type": "사내 솔루션",
+      "start_date": "2025-01-01",
+      "end_date": "2025-05-31",
+      "skills": ["AI Model", "FastAPI", "API"],
+      "achievement": null
+    }
+  },
+  {
+    "id": "dacon_gemma_01",
+    "text": "DACON '문장 순서 배열' 경진대회에서, QLoRA 기법을 적용하여 A5000 (24GB) 단일 GPU 환경에서도 Gemma-3-12B-it와 같은 거대 언어 모델을 안정적으로 파인튜닝하여 최종 7위를 달성했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "모델 아키텍처",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": ["LLM", "Gemma", "QLoRA", "PEFT", "Fine-tuning"],
+      "achievement": "7위"
+    }
+  },
+  {
+    "id": "dacon_gemma_02",
+    "text": "'문장 순서 배열' 경진대회에서, 더 큰 모델인 Gemma-3-27B를 활용하여 패러프레이징(Paraphrasing) 기법으로 학습 데이터를 증강하여 모델의 일반화 성능을 극대화했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "데이터 중심 AI 전략",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": ["Data Augmentation", "Paraphrasing", "LLM", "Gemma"],
+      "achievement": "7위"
+    }
+  }
+]
