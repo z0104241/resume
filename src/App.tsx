@@ -3,11 +3,11 @@ import careerSection from "./data/career";
 import skillsSection from "./data/skills";
 import eduSection from "./data/edu";
 import etcSection from "./data/etc";
-import type { ResumeSection, MenuType } from "./types.tsx";
+// Message 타입을 가져옵니다.
+import type { ResumeSection, MenuType, Message } from "./types.tsx";
 import HomePage from './data/HomePage'; 
-import WelcomeAnimation from './WelcomeAnimation'; // 새로 만든 WelcomeAnimation 컴포넌트를 가져옵니다.
+import WelcomeAnimation from './WelcomeAnimation';
 
-// 이력서 섹션 데이터
 const resumeSections: ResumeSection[] = [
   careerSection,
   skillsSection,
@@ -104,14 +104,15 @@ const Sidebar: React.FC<{
 
 // --- 메인 App 컴포넌트 ---
 const App: React.FC = () => {
-  // 환영 애니메이션 표시 여부를 제어하는 상태를 추가합니다.
   const [showWelcome, setShowWelcome] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [isPinned, setIsPinned] = useState<boolean>(false);
-  const [prompt, setPrompt] = useState<string>("");
-  const [answer, setAnswer] = useState<string>("");
   const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
   const [menu, setMenu] = useState<MenuType>("home");
+
+  // 대화 기록과 채팅 확장 상태를 App 컴포넌트에서 관리합니다.
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
+  const [isChatFullScreen, setIsChatFullScreen] = useState(false);
 
   const leaveTimeout = useRef<number | null>(null);
 
@@ -145,27 +146,6 @@ const App: React.FC = () => {
     }
   };
 
-  async function handleQuery() {
-    if (!prompt.trim()) {
-      setAnswer("질문을 입력해주세요.");
-      return;
-    }
-    setAnswer("AI가 답변을 생성 중입니다...");
-    try {
-      const res = await fetch("http://localhost:3001/query", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-      if (!res.ok) throw new Error(`서버 오류: ${res.statusText}`);
-      const data = await res.json();
-      setAnswer(data.answer);
-    } catch (e) {
-      console.error(e);
-      setAnswer("서버 연결에 실패했습니다. 로컬 개발 환경인지 확인해주세요.");
-    }
-  }
-
   const getCurrentTitle = () => {
     if (menu === 'home') return '프로필 및 Q&A';
     const section = resumeSections.find(sec => sec.key === menu);
@@ -175,7 +155,6 @@ const App: React.FC = () => {
     return section?.title || '';
   }
 
-  // 환영 애니메이션이 활성화 상태이면 애니메이션 컴포넌트를 렌더링합니다.
   if (showWelcome) {
     return <WelcomeAnimation onAnimationEnd={() => setShowWelcome(false)} />;
   }
@@ -221,11 +200,12 @@ const App: React.FC = () => {
 
         <main className="flex-1 p-4 sm:p-6 md:p-8">
             {menu === "home" ? (
+              // HomePage에 상태와 상태 설정 함수를 props로 전달합니다.
               <HomePage 
-                prompt={prompt}
-                setPrompt={setPrompt}
-                answer={answer}
-                handleQuery={handleQuery}
+                messages={chatMessages}
+                setMessages={setChatMessages}
+                isChatFullScreen={isChatFullScreen}
+                setIsChatFullScreen={setIsChatFullScreen}
               />
             ) : (
               <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 w-full max-w-4xl mx-auto">
