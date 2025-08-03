@@ -12,9 +12,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# 애플리케이션 파일들 복사
+# 애플리케이션 파일 복사
 COPY rag_handler.py .
-COPY resume_vec_0729_emb.json .
+# --- [삭제됨] --- 아래 라인을 삭제하여 더 이상 JSON 파일을 이미지에 포함하지 않습니다.
+# COPY resume_vec_0729_emb.json .
 
 # Lambda 핸들러 설정
 CMD ["rag_handler.lambda_handler"]
