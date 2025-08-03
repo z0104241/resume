@@ -40,7 +40,7 @@ const HomePage: React.FC<HomePageProps> = ({
     // AI 응답 대기 메시지 추가
     setMessages(prev => [...prev, { sender: 'ai', text: "답변을 생성 중입니다..." }]);
 
-    const apiEndpoint = "https://5hrfikrw67.execute-api.ap-northeast-2.amazonaws.com/0731/resume-rag-api";
+    const apiEndpoint = "https://5hrfikrw67.execute-api.ap-northeast-2.amazonaws.com/0731/resume-rag-pkg";
 
     try {
       const res = await fetch(apiEndpoint, {
