@@ -1,7 +1,6 @@
 import json
 import os
 import boto3
-from openai import OpenAI
 import traceback
 
 # LangChain 핵심 라이브러리 임포트
@@ -10,6 +9,10 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
 from langchain_qdrant import QdrantVectorStore
+# --- [추가됨] Self-Querying Retriever 관련 라이브러리 ---
+from langchain.retrievers.self_query.base import SelfQueryRetriever
+from langchain.chains.query_constructor.base import AttributeInfo
+# --- [추가 끝] ---
 
 # Qdrant 직접 사용
 from qdrant_client import QdrantClient
@@ -33,9 +36,7 @@ WEB_ORIGIN = "https://jjh-resume.click"
 
 # 벡터 DB JSON 파일이 저장된 S3 정보
 S3_VECTOR_BUCKET = "resume-vec-db"
-# --- [수정됨] ---
-S3_VECTOR_KEY = "resume_vec_emb.json"
-# --- [수정 끝] ---
+S3_VECTOR_KEY = "resume_vec_emb.json" # 최신화된 파일 이름으로 변경
 
 # Cold Start 최적화를 위해 전역 범위에 서비스 변수 선언
 llm = None
@@ -74,12 +75,17 @@ def initialize_services():
 
         qdrant_client = QdrantClient(":memory:")
         collection_name = "resume_collection"
-        embedding_dim = 1536
+        embedding_dim = 1536 # text-embedding-ada-002의 임베딩 차원
 
         qdrant_client.recreate_collection(
             collection_name=collection_name,
             vectors_config=models.VectorParams(size=embedding_dim, distance=models.Distance.COSINE)
         )
+
+        # 임베딩 값이 없는 경우를 대비하여 빈 리스트로 초기화
+        for item in resume_data:
+            if 'embedding' not in item or not item['embedding']:
+                item['embedding'] = [0.0] * embedding_dim
 
         points = [
             models.PointStruct(
@@ -98,7 +104,31 @@ def initialize_services():
             content_payload_key="page_content",
             metadata_payload_key="metadata"
         )
-        retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+        # --- [수정됨] SelfQueryRetriever 설정 ---
+        # 1. 메타데이터 필드 정보 정의
+        metadata_field_info = [
+            AttributeInfo(name="project_name", description="프로젝트의 공식 명칭", type="string"),
+            AttributeInfo(name="category", description="경험의 대분류 (예: '회사 업무', '개인 역량 강화', '학술 활동')", type="string"),
+            AttributeInfo(name="type", description="경험의 소분류 (예: '학부 프로젝트', '인턴십', '고객사 SI', '경진대회')", type="string"),
+            AttributeInfo(name="technique_type", description="프로젝트 내에서 수행한 구체적인 기술 역할 (예: '모델 아키텍처 설계', '데이터 중심 문제 해결')", type="string"),
+            AttributeInfo(name="start_date", description="프로젝트 시작일 (YYYY-MM-DD 형식)", type="string"),
+            AttributeInfo(name="skills", description="프로젝트에 사용된 기술 스택 또는 역량 목록", type="string"),
+            AttributeInfo(name="achievement", description="프로젝트를 통해 달성한 구체적인 성과", type="string"),
+        ]
+
+        # 2. 문서 내용에 대한 설명
+        document_content_description = "한 지원자의 이력서에 담긴 특정 프로젝트 경험이나 역량에 대한 상세 설명"
+
+        # 3. Self-Querying Retriever 생성
+        retriever = SelfQueryRetriever.from_llm(
+            llm,
+            vectorstore,
+            document_content_description,
+            metadata_field_info,
+            verbose=True # 개발 및 디버깅 시 True로 설정하면 내부 동작 확인 가능
+        )
+        # --- [수정 끝] ---
 
         prompt_template = """
 당신은 전재현 님의 이력서에 대해 답변하는 친절한 AI 어시스턴트입니다.
