@@ -1,0 +1,583 @@
+[
+  {
+    "id": "summary_main_career",
+    "text": "저의 주요 경력은 국방, 공공 분야의 복잡한 데이터를 분석하고, 사내 업무 효율을 극대화하는 AI 솔루션을 개발한 경험입니다. 첫째, '동일/유사무기 체계 분석' 프로젝트에서는 Node2Vec과 KR-SBERT를 결합한 하이브리드 모델로 복합 데이터의 분석 정확도를 15% 이상 향상시켰습니다. 둘째, 'AI 기반 RFP 분석 시스템'에서는 RAG 아키텍처를 설계하고 PDF에서 95% 이상의 정확도로 데이터를 추출하는 등 기술적 문제를 해결했습니다. 마지막으로, '자사 인적성 검사 서비스' 개발에 참여하여 확장성 높은 데이터베이스 스키마 설계부터 AWS 인프라 구축까지 백엔드 개발의 핵심적인 역할을 수행했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "주요 경력 요약",
+      "category": "요약",
+      "type": "경력",
+      "start_date": "2023-02-01",
+      "end_date": "2025-06-30",
+      "skills": ["하이브리드 모델", "RAG", "백엔드 개발", "데이터베이스 설계", "AWS", "문제 해결"],
+      "achievement": "핵심 경력 요약"
+    }
+  },
+  {
+    "id": "summary_main_projects",
+    "text": "저의 주요 프로젝트는 국방 및 공공 데이터 분석, 사내 업무 자동화, 그리고 최신 LLM 기술을 활용한 경진대회 경험을 포함합니다. '동일/유사무기 체계 분석'에서는 하이브리드 모델로 분석 정확도를 높였고, 'AI 기반 RFP 분석 시스템'에서는 RAG 아키텍처를 설계하고 구현했습니다. '자사 인적성 검사 서비스 개발'에서는 백엔드 개발 전반을 주도했습니다. 특히, '문장 순서 배열 AI 경진대회'에서는 제한된 GPU 환경의 한계를 QLoRA와 데이터 중심 전략으로 극복하여 LLM을 성공적으로 파인튜닝하고 최종 7위의 성과를 거두며 최신 기술 적용 능력을 증명했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "주요 프로젝트 요약",
+      "category": "요약",
+      "type": "프로젝트",
+      "start_date": "2023-02-01",
+      "end_date": "2025-06-30",
+      "skills": ["데이터 분석", "AI 솔루션 개발", "LLM", "Fine-tuning", "RAG", "백엔드"],
+      "achievement": "핵심 프로젝트 요약"
+    }
+  },
+  {
+    "id": "personal_project_rag_chatbot_01_architecture",
+    "text": "개인 포트폴리오를 방문하는 면접관이나 채용 담당자가 제 경험에 대해 쉽고 깊이 있게 탐색할 수 있는 인터랙티브 AI 챗봇을 구현하는 것을 목표로 삼았습니다. 이를 위해 확장성과 비용 효율성이 뛰어난 서버리스(Serverless) 기반의 검색 증강 생성(RAG) 아키텍처를 AWS Lambda 환경에 직접 설계했습니다. LangChain을 사용해 전체 로직을 오케스트레이션하고, Qdrant를 인메모리 벡터 DB로 활용했으며, 이력서 데이터와 API 키 같은 민감 정보는 AWS S3에 안전하게 분리하여 관리하는 등 안정성과 보안성을 모두 고려한 시스템을 구축했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Serverless RAG 기반의 AI 이력서 챗봇 시스템 개발",
+      "category": "개인 프로젝트",
+      "type": "엔드투엔드 시스템 개발",
+      "technique_type": "솔루션 아키텍처 설계",
+      "start_date": "2025-07-28",
+      "end_date": "2024-08-05",
+      "skills": ["Serverless", "AWS Lambda", "RAG", "System Architecture", "LangChain", "Qdrant", "AWS S3"],
+      "achievement": "확장성과 안정성을 고려한 서버리스 RAG 아키텍처 설계 및 구축"
+    }
+  },
+  {
+    "id": "personal_project_rag_chatbot_02_self_querying",
+    "text": "단순한 의미 검색만으로는 '2025년에 수행한 LLM 관련 프로젝트 알려줘'와 같은 복합적인 질문에 정확히 답변할 수 없다는 한계가 있었습니다. 이 문제를 해결하기 위해, LangChain의 'SelfQueryRetriever'를 도입하여 지능형 검색 기능을 구현했습니다. 이력서 데이터의 메타데이터 스키마를 명확히 정의하고, 1차적으로 LLM이 사용자의 자연어 질문을 분석하여 구조화된 필터로 변환하게 만들었습니다. 그 결과, 날짜, 기술 스택, 프로젝트 유형 등 여러 조건을 결합한 복잡한 질문의 의도를 시스템이 정확히 파악하고 정밀한 답변을 제공할 수 있게 되었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Serverless RAG 기반의 AI 이력서 챗봇 시스템 개발",
+      "category": "개인 프로젝트",
+      "type": "엔드투엔드 시스템 개발",
+      "technique_type": "지능형 검색 기능 구현",
+      "start_date": "2025-07-28",
+      "end_date": "2025-08-05",
+      "skills": ["Self-Querying", "Metadata Filtering", "LLM", "LangChain", "Natural Language Understanding"],
+      "achievement": "자연어 질문을 구조화된 필터로 변환하는 지능형 검색 기능 구현"
+    }
+  },
+  {
+    "id": "personal_project_rag_chatbot_03_optimization",
+    "text": "OpenAI API에 대한 반복적인 호출로 인해 발생할 수 있는 비용 및 응답 속도 저하 문제를 해결해야 했습니다. 이를 위해 AWS DynamoDB를 활용한 캐싱(Caching) 계층을 시스템에 추가했습니다. RAG 체인을 호출하기 전, DynamoDB 테이블을 먼저 조회하여 동일한 질문에 대한 기존 답변이 있는지 확인하는 로직을 구현했습니다. 이 전략을 통해 중복 API 호출을 원천적으로 차단하여 운영 비용을 크게 절감하고, 반복 질문에 대해서는 즉각적인 응답이 가능하도록 시스템 성능을 최적화했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Serverless RAG 기반의 AI 이력서 챗봇 시스템 개발",
+      "category": "개인 프로젝트",
+      "type": "엔드투엔드 시스템 개발",
+      "technique_type": "성능 및 비용 최적화",
+      "start_date": "2025-07-28",
+      "end_date": "2025-08-05",
+      "skills": ["Caching", "AWS DynamoDB", "Performance Optimization", "Cost Management", "API"],
+      "achievement": "DynamoDB 캐싱 계층 구현을 통한 API 호출 수 및 운영 비용 절감"
+    }
+  },
+  {
+    "id": "personal_project_rag_chatbot_04_deployment",
+    "text": "로컬 개발 환경과 실제 클라우드 환경 간의 차이로 인해 발생할 수 있는 배포 오류를 최소화하고, 안정적인 운영을 보장해야 했습니다. 이를 위해 Docker를 사용하여 Python 애플리케이션과 모든 의존성 라이브러리를 포함하는 컨테이너 이미지를 생성했습니다. AWS Lambda의 공식 기본 이미지를 활용하여 람다 런타임과 완벽히 호환되는 실행 환경을 구축했습니다. 그 결과, 배포 과정의 일관성과 재현성을 확보하여, 향후 기능 추가 및 유지보수가 용이한 CI/CD 파이프라인의 기반을 마련했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Serverless RAG 기반의 AI 이력서 챗봇 시스템 개발",
+      "category": "개인 프로젝트",
+      "type": "엔드투엔드 시스템 개발",
+      "technique_type": "컨테이너 기반 배포 자동화",
+      "start_date": "2025-07-28",
+      "end_date": "2025-08-05",
+      "skills": ["Docker", "Containerization", "AWS Lambda", "DevOps", "CI/CD", "Reproducibility"],
+      "achievement": "Docker를 활용한 안정적이고 재현 가능한 서버리스 배포 환경 구축"
+    }
+  },
+  {
+    "id": "undergrad_01",
+    "text": "기존 별점 시스템이 일부 사용자의 편향된 평가로 신뢰도가 저하되는 상황이었습니다. 텍스트 리뷰를 분석해 객관적인 신뢰도를 보완하는 것이 과제였습니다. 저는 Selenium 데이터 수집, Konlpy 전처리, DNN 모델 설계 및 학습까지 전 과정을 주도했습니다. 그 결과, 긍정/부정 리뷰를 92.5% 정확도로 분류해냈고, 이 성과를 인정받아 PBL 교과목 평가에서 2위를 수상했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "배달 플랫폼 리뷰 데이터 분석",
+      "category": "개인 역량 강화",
+      "type": "학부 프로젝트",
+      "start_date": "2021-03-01",
+      "end_date": "2021-07-31",
+      "skills": [
+        "Crawling",
+        "Selenium",
+        "Konlpy",
+        "TF-IDF",
+        "DNN",
+        "Text-Mining"
+      ],
+      "achievement": "PBL 교과목 평가 2위"
+    }
+  },
+  {
+    "id": "marine_01",
+    "text": "수산자원 증대사업의 실효성을 객관적인 데이터로 검증해야 하는 상황이었습니다. 저는 시계열 모델을 활용해 사업이 어획량에 미치는 영향을 분석하고 미래 어획량을 예측하는 과제를 담당했습니다. 계절성을 고려한 SARIMA와 딥러닝 모델 LSTM을 비교 분석하여, 사업 시행 후 어획량이 유의미하게 증가했음을 통계적으로 입증했습니다. 이를 통해 사업의 효과성을 증명하고 예산 확보의 근거를 마련하는 데 기여했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "수산자원 증대사업 효과분석",
+      "category": "회사 업무",
+      "type": "고객사 SI",
+      "start_date": "2022-06-01",
+      "end_date": "2022-12-31",
+      "skills": [
+        "SARIMA",
+        "LSTM",
+        "Time-Series",
+        "Forecasting"
+      ],
+      "achievement": "사업 효과성 입증 및 예산 확보 기여"
+    }
+  },
+  {
+    "id": "paper_01",
+    "text": "재직 중 AI 기술 역량을 심화하고 연구 성과를 내고 싶은 목표가 있었습니다. 저는 주말 스터디를 조직하여 이미지 생성 모델에 대한 공동 연구를 진행했습니다. StyleGAN2-ADA와 Layer Swapping 기법을 적용하여 독창적인 카툰 얼굴 이미지를 생성하는 모델을 개발했고, 그 과정을 논문으로 작성했습니다. 그 결과, 한국소프트웨어종합학술대회에서 장려상을 수상하며 연구 역량을 공식적으로 인정받았습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "Cartoon Face Generation 연구",
+      "category": "개인 역량 강화",
+      "type": "학술 활동",
+      "start_date": "2022-09-01",
+      "end_date": "2022-11-30",
+      "skills": [
+        "StyleGAN",
+        "Image Generation",
+        "Paper",
+        "PyTorch"
+      ],
+      "achievement": "장려상"
+    }
+  },
+  {
+    "id": "dtaq_env_01",
+    "text": "인터넷이 차단된 국방 내부망이라는 제한적인 환경에서 분석 프로젝트를 수행해야 했습니다. 저는 주어진 서버에 분석 환경을 구축하는 과제를 맡아, 직접 Ubuntu OS를 설치하고 SSH 접속 환경을 설정했습니다. 이러한 주도적인 환경 구축 노력을 통해, 어떠한 제약 조건 속에서도 독립적으로 문제를 해결하고 프로젝트를 완수할 수 있는 높은 기술 자립심을 보여주었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "국방기술품질원 상주 사업",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "분석 환경 구축",
+      "start_date": "2023-02-01",
+      "end_date": "2024-02-29",
+      "skills": [
+        "Linux",
+        "Ubuntu",
+        "Server Setup",
+        "SSH",
+        "Security"
+      ],
+      "achievement": "제한된 환경에서의 문제 해결 능력 입증"
+    }
+  },
+  {
+    "id": "dtaq_poc_01",
+    "text": "신규 군수품의 품질보증 형태를 자동으로 추천하는 모델 개발의 실현 가능성을 검증해야 했습니다. 저는 개념검증(PoC)을 담당하여, 초기 모델 개발 중 발생하는 여러 제한사항에 직면했습니다. 이에 저는 유연하게 과제 방향을 수정하여 군집분류와 지수평활법을 활용하는 새로운 모델을 제안했습니다. 그 결과, 개념검증(PoC)을 성공적으로 완수하며 프로젝트의 본 사업 착수 기반을 마련했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "품보형태 자동 추천",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "개념검증(PoC) 및 모델링",
+      "start_date": "2023-02-01",
+      "end_date": "2023-06-30",
+      "skills": [
+        "PoC",
+        "Clustering",
+        "Time-Series",
+        "Forecasting"
+      ],
+      "achievement": "개념검증 성공 및 본 사업 착수 기반 마련"
+    }
+  },
+  {
+    "id": "dtaq_main_01",
+    "text": "무기체계 데이터가 단순 텍스트와 계층적 구조를 모두 가진 복합적인 특성을 가지고 있었습니다. 저는 이 특성을 모두 반영하는 고성능 분석 모델을 개발해야 했습니다. 이를 위해 Node2Vec(계층 구조)과 KR-SBERT(텍스트 의미)를 함께 활용하는 독창적인 하이브리드 모델을 직접 설계하고 개발했습니다. 그 결과, 기존 단일 모델 대비 15% 이상 높은 정확도를 달성하며 과제의 핵심 기술 목표를 초과 달성했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "동일/유사무기 체계 분석",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "핵심 분석 모델",
+      "start_date": "2023-09-01",
+      "end_date": "2024-02-29",
+      "skills": [
+        "Node2Vec",
+        "KR-SBERT",
+        "Graph-Embedding",
+        "NLP",
+        "Hybrid Model"
+      ],
+      "achievement": "기존 모델 대비 15% 성능 향상"
+    }
+  },
+  {
+    "id": "dtaq_main_02",
+    "text": "분석 모델이 일회성으로 그치지 않고 지속적으로 운영되어야 하는 상황이었습니다. 저는 모델의 지속가능성을 확보하는 과제를 맡아, 분석 결과를 데이터 마트로 구축하고 자동 업데이트 파이프라인을 설계했습니다. 새로운 데이터 입력 시 모델 학습과 데이터 마트 업데이트가 자동으로 수행되도록 프로그래밍하여, 수동 작업 대비 운영 리소스를 80% 이상 절감하는 성과를 냈습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "동일/유사무기 체계 분석",
+      "category": "회사 업무",
+      "type": "고객사 SI (상주)",
+      "technique_type": "MLOps 및 자동화",
+      "start_date": "2023-09-01",
+      "end_date": "2024-02-29",
+      "skills": [
+        "MLOps",
+        "Data Mart",
+        "Automation",
+        "Pipeline"
+      ],
+      "achievement": "운영 리소스 80% 절감"
+    }
+  },
+  {
+    "id": "rfp_rag_01_planning",
+    "text": "기업의 제안서 작성 비효율 문제를 해결하고자, 신규 제안요청서(RFP)와 과거 유사 사례를 AI로 비교 분석하는 솔루션을 기획했습니다. LLM의 토큰 제한과 비용 문제를 극복하기 위해, LangChain 프레임워크 기반의 검색 증강 생성(RAG) 아키텍처를 설계하여 기술적 타당성과 확장성을 동시에 확보했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "AI 기반 유사 제안요청서(RFP) 분석 시스템",
+      "category": "사내 프로젝트",
+      "type": "프로토타입 개발",
+      "technique_type": "솔루션 기획 및 RAG 아키텍처 설계",
+      "start_date": "2024-04-01",
+      "end_date": "2024-07-31",
+      "skills": [
+        "RAG",
+        "System Architecture",
+        "LangChain",
+        "LLM",
+        "Problem Solving",
+        "Solution Design"
+      ],
+      "achievement": "핵심 기능 구현 및 기술 검증 완료"
+    }
+  },
+  {
+    "id": "rfp_rag_02_pipeline",
+    "text": "다양한 포맷(PDF 등)의 비정형 RFP 원문을 안정적으로 처리하는 데이터 파이프라인을 구축했습니다. LangChain의 Document Loader를 활용해 텍스트를 추출 및 분할하고, OpenAI Embedding API로 벡터화하여 ChromaDB에 저장하는 전 과정을 자동화하며 AI 모델의 지식 기반을 마련했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "AI 기반 유사 제안요청서(RFP) 분석 시스템",
+      "category": "사내 프로젝트",
+      "type": "프로토타입 개발",
+      "technique_type": "데이터 파이프라인 구축 및 자동화",
+      "start_date": "2024-04-01",
+      "end_date": "2024-07-31",
+      "skills": [
+        "Data Pipeline",
+        "ETL",
+        "LangChain",
+        "Text Processing",
+        "OpenAI API",
+        "ChromaDB"
+      ],
+      "achievement": "비정형 데이터 처리 파이프라인 구축 완료"
+    }
+  },
+  {
+    "id": "rfp_rag_03_challenge",
+    "text": "프로젝트 초기, 복잡한 레이아웃과 다수의 표(Table)로 구성된 PDF 원문에서 핵심 데이터를 정확히 파싱하는 데 어려움을 겪었습니다. 이 문제를 해결하고자 테이블 및 레이아웃 구조 인식에 특화된 docling 라이브러리를 도입하여, 요구사항이나 예산 같은 중요 정보의 추출 정확도를 95% 이상으로 끌어올리며 데이터 파이프라인의 신뢰성을 확보했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "AI 기반 유사 제안요청서(RFP) 분석 시스템",
+      "category": "사내 프로젝트",
+      "type": "프로토타입 개발",
+      "technique_type": "기술적 문제 해결 (PDF 파싱)",
+      "start_date": "2024-04-01",
+      "end_date": "2024-07-31",
+      "skills": [
+        "PDF Parsing",
+        "Table Extraction",
+        "Layout Analysis",
+        "docling",
+        "Unstructured Data Processing",
+        "Problem Solving"
+      ],
+      "achievement": "표/레이아웃 데이터 추출 정확도 95% 이상 달성"
+    }
+  },
+  {
+    "id": "rfp_rag_04_prototyping",
+    "text": "설계한 RAG 아키텍처를 기반으로 핵심 기능을 구현한 프로토타입 개발을 주도했습니다. 신규 RFP 입력 시, 벡터 DB에서 관련성이 높은 과거 사례를 실시간으로 검색하고, 이를 근거로 LLM이 두 문서의 유사점과 차이점을 분석하는 결과물을 성공적으로 도출하며 아이디어의 기술적 실현 가능성을 입증했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "AI 기반 유사 제안요청서(RFP) 분석 시스템",
+      "category": "사내 프로젝트",
+      "type": "프로토타입 개발",
+      "technique_type": "핵심 기능 프로토타이핑 및 기술 검증",
+      "start_date": "2024-04-01",
+      "end_date": "2024-07-31",
+      "skills": [
+        "Prototyping",
+        "LangChain Expression Language (LCEL)",
+        "OpenAI API",
+        "Vector Search",
+        "FastAPI"
+      ],
+      "achievement": "핵심 기능(유사도 검색 및 비교 분석)을 갖춘 프로토타입 개발 성공"
+    }
+  },
+  {
+    "id": "dacon_review_sentiment_01_problem",
+    "text": "리뷰 감성 분석 대회의 목표는 주어진 텍스트의 감성을 긍정, 부정, 중립으로 분류하는 것이었습니다. 높은 성능 경쟁 속에서 차별화된 최고 성능의 모델을 구현하여 1위를 달성하는 것을 목표로 설정했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "문제 정의 및 목표 설정",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": [
+        "Sentiment Analysis",
+        "Natural Language Processing",
+        "KoBERT"
+      ],
+      "achievement": "최종 1위 (F1 Score: 0.608)"
+    }
+  },
+  {
+    "id": "dacon_review_sentiment_02_architecture",
+    "text": "강력한 한국어 이해 능력을 가진 `skt/kobert-base-v1` 모델을 기반으로 Fine-tuning을 수행했습니다. PyTorch로 `BERTClassifier` 클래스를 직접 정의하여 사전 학습된 KoBERT 모델의 마지막 단에 분류를 위한 선형 레이어(Linear Layer)와 드롭아웃(Dropout)을 추가하는 커스텀 아키텍처를 설계했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "모델 아키텍처 설계",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": [
+        "KoBERT",
+        "Fine-tuning",
+        "PyTorch",
+        "transformers",
+        "Model Customization"
+      ],
+      "achievement": "최종 1위 (F1 Score: 0.608)"
+    }
+  },
+  {
+    "id": "dacon_review_sentiment_03_training",
+    "text": "학습 효율과 안정성을 높이기 위해 두 가지 핵심 전략을 적용했습니다. 첫째, 각 배치의 최대 길이에 맞춰 패딩하는 '동적 패딩(Dynamic Padding)'을 `collate_fn`으로 구현하여 메모리 사용량과 계산 시간을 줄였습니다. 둘째, 'Cosine Annealing Scheduler'를 도입하여 학습률을 동적으로 조절하며 모델이 안정적으로 최적점에 수렴하도록 유도했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "효율적 학습 전략",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": [
+        "Dynamic Padding",
+        "Learning Rate Scheduler",
+        "Collate Function",
+        "Training Optimization"
+      ],
+      "achievement": "최종 1위 (F1 Score: 0.608)"
+    }
+  },
+  {
+    "id": "dacon_review_sentiment_04_imbalance",
+    "text": "학습 데이터를 분석한 결과, 특정 클래스에 데이터가 치우쳐 있는 '클래스 불균형(Class Imbalance)' 문제를 발견했습니다. 이 문제는 모델이 다수 클래스에만 과적합되어 소수 클래스의 예측 성능이 저하되는 직접적인 원인이 될 수 있었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "데이터 문제 분석",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": [
+        "Class Imbalance",
+        "Data Analysis",
+        "Exploratory Data Analysis"
+      ],
+      "achievement": "최종 1위 (F1 Score: 0.608)"
+    }
+  },
+  {
+    "id": "dacon_review_sentiment_05_solution",
+    "text": "클래스 불균형 문제를 해결하기 위해 데이터 중심적 AI 전략을 적용했습니다. scikit-learn의 `compute_class_weight` 함수를 사용하여 클래스별 가중치를 계산하고, 이를 PyTorch의 `CrossEntropyLoss` 손실 함수에 직접 전달했습니다. 이 접근법은 데이터가 적은 클래스의 오류에 더 큰 페널티를 부여하여 모델의 일반화 성능을 크게 향상시켰고, F1 Score를 0.012p 높이며 최종 1위 달성에 결정적인 기여를 했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "리뷰 감성 분석 대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "데이터 중심 문제 해결",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-31",
+      "skills": [
+        "Data-Centric AI",
+        "Class Weighting",
+        "Loss Function Customization",
+        "scikit-learn"
+      ],
+      "achievement": "최종 1위 (F1 Score: 0.608)"
+    }
+  },
+  {
+    "id": "assessment_dev_01_db_design",
+    "text": "신규 인적성 검사 서비스의 백엔드 개발에 참여하여, 검사 문항, 사용자 응답, 결과 데이터 등을 효율적으로 관리하기 위한 데이터베이스 스키마를 직접 정의하고 설계했습니다. 데이터의 정규화와 관계 설정을 통해 데이터 무결성을 확보하고, 향후 다양한 분석 지표 확장에 유연하게 대응할 수 있는 확장성 높은 DB 구조의 기틀을 마련했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "자사 인적성 검사 서비스 개발",
+      "category": "사내 프로젝트",
+      "type": "신규 서비스 개발",
+      "technique_type": "데이터베이스 설계 및 모델링",
+      "start_date": "2025-02-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Database Design",
+        "Schema Definition",
+        "Data Modeling",
+        "SQL",
+        "Data Integrity",
+        "Scalability"
+      ],
+      "achievement": "서비스 핵심 데이터베이스 구조 설계 및 구축"
+    }
+  },
+  {
+    "id": "assessment_dev_02_infra_setup",
+    "text": "서비스의 안정적인 운영을 위해 AWS EC2 인스턴스와 EBS 볼륨을 활용하여 직접 서버 환경을 구축했습니다. 트래픽 예측에 기반한 인스턴스 사양을 선정하고, 데이터의 영속성을 보장하기 위한 EBS 스토리지 구성 및 백업 정책을 수립하며 클라우드 인프라 구축 및 운영 역량을 발휘했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "자사 인적성 검사 서비스 개발",
+      "category": "사내 프로젝트",
+      "type": "신규 서비스 개발",
+      "technique_type": "클라우드 인프라 구축 (AWS)",
+      "start_date": "2025-02-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "AWS",
+        "EC2",
+        "EBS",
+        "Infrastructure as a Service (IaaS)",
+        "Server Setup",
+        "Cloud Architecture"
+      ],
+      "achievement": "AWS 기반 초기 서버 인프라 구축 및 환경 설정 완료"
+    }
+  },
+  {
+    "id": "assessment_dev_03_contribution",
+    "text": "DB 설계 및 서버 구축 외에도, 사용자의 응답 패턴을 분석하여 역량별 점수를 산출하는 가중치 모델 개발에 일부 참여했습니다. 또한, 개발 과정에서 발견되는 버그를 선제적으로 리포트하고 수정 과정에 기여하며 서비스의 전체적인 안정성과 완성도를 높이는 데 기여했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "자사 인적성 검사 서비스 개발",
+      "category": "사내 프로젝트",
+      "type": "신규 서비스 개발",
+      "technique_type": "백엔드 개발 및 QA 기여",
+      "start_date": "2025-02-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Backend Development",
+        "Algorithm",
+        "Bug Reporting",
+        "Quality Assurance",
+        "Collaboration"
+      ],
+      "achievement": "가중치 모델 개발 참여 및 서비스 안정성 기여"
+    }
+  },
+  {
+    "id": "dacon_gemma_01_problem",
+    "text": "프로젝트 목표는 문맥을 이해하여 문장 순서를 배열하는 것으로, LLM 활용이 필수적이었습니다. 하지만 단일 A5000(24GB) GPU라는 제한된 자원으로 인해 10B 이상의 대형 모델을 파인튜닝하는 데 기술적, 비용적 장벽이 있었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "문제 정의 및 제약사항 분석",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Problem Analysis",
+        "LLM",
+        "GPU Constraints"
+      ],
+      "achievement": "최종 7위"
+    }
+  },
+  {
+    "id": "dacon_gemma_02_solution",
+    "text": "하드웨어 한계를 극복하기 위해 QLoRA(Quantized Low-Rank Adaptation) 기법을 도입했습니다. 4-bit 양자화와 최적화된 LoRA 하이퍼파라미터(r=64, alpha=128)를 적용하여, 24GB VRAM 내에서 12B급 Gemma 모델의 안정적인 파인튜닝에 성공하며 기술적 문제를 해결했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "효율적 미세조정 (PEFT)",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "QLoRA",
+        "PEFT",
+        "Fine-tuning",
+        "bitsandbytes",
+        "Gemma-12B",
+        "Resource Management"
+      ],
+      "achievement": "최종 7위"
+    }
+  },
+  {
+    "id": "dacon_gemma_03_strategy",
+    "text": "초기 실험 결과, 모델 크기 확대만으로는 성능 향상에 한계가 있음을 발견하고, '모델이 얼마나 다양한 논리적 패턴을 학습했는가'가 핵심이라는 가설을 세웠습니다. 이에 따라 데이터의 양과 질을 높이는 데이터 중심(Data-Centric) 접근법으로 전략을 전환했습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "가설 수립 및 전략 전환",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Data-Centric AI",
+        "Hypothesis Testing",
+        "Experiment Design"
+      ],
+      "achievement": "최종 7위"
+    }
+  },
+  {
+    "id": "dacon_gemma_04_augmentation",
+    "text": "성능이 더 뛰어난 Gemma-27B 모델을 데이터 증강에 활용하는 전략을 수립했습니다. 특히, 개별 문장이 아닌 논리적으로 연결된 전체 문단을 패러프레이징(Paraphrasing)하도록 프롬프트를 설계하여, 문맥적 일관성을 유지하는 고품질의 학습 데이터를 생성했습니다. 이 전략은 정확도를 0.1%p 향상시켜 최종 순위를 결정하는 가장 중요한 요소가 되었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "고도화된 데이터 증강",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Data Augmentation",
+        "Paraphrasing",
+        "Prompt Engineering",
+        "Gemma-27B",
+        "llama-cpp-python"
+      ],
+      "achievement": "최종 7위"
+    }
+  },
+  {
+    "id": "dacon_gemma_05_automation",
+    "text": "데이터 증강, 훈련, 추론으로 이어지는 전체 파이프라인을 main.py 스크립트로 자동화하여 실험의 효율성과 재현성을 확보했습니다. 체계적인 실험과 데이터 중심의 문제 해결 전략을 통해 최종 7위라는 우수한 성과를 달성할 수 있었습니다.",
+    "embedding": [],
+    "metadata": {
+      "project_name": "문장 순서 배열 AI 경진대회",
+      "category": "개인 역량 강화",
+      "type": "경진대회",
+      "technique_type": "실험 자동화 및 재현성 확보",
+      "start_date": "2025-05-01",
+      "end_date": "2025-06-30",
+      "skills": [
+        "Automation",
+        "Experiment Pipeline",
+        "Reproducibility",
+        "Python Scripting"
+      ],
+      "achievement": "최종 7위"
+    }
+  }
+]
