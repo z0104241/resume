@@ -5,10 +5,11 @@ const skillsSection: ResumeSection = {
   title: "주요 기술/스택",
   content: (
     <ul className="list-disc ml-6 space-y-1">
-      <li>Python (데이터/AI 전공), FastAPI, vLLM</li>
-      <li>React, TypeScript, Vite</li>
-      <li>Chroma/FAISS, Hugging Face</li>
+      <li><strong>사용언어</strong> : Python, </li>
+      <li><strong>AI & RAG</strong> : LangChain, OpenAI, Qdrant, transformers, PEFT, FastAPI, vLLM</li>
+      <li><strong>Cloud & Infra (AWS)</strong> : EC2, Lambda, ECR, S3, CloudFront, API Gateway, Secrets Manager</li>
     </ul>
   ),
 };
+
 export default skillsSection;

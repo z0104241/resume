@@ -1,26 +1,25 @@
-import type React from 'react';
-
-// 대화 메시지 타입을 추가합니다.
-export type Message = {
-  sender: 'user' | 'ai';
+export interface Message {
+  sender: string;
   text: string;
-};
+}
 
-// 기존에 정의된 타입들
-export type MenuType = "home" | "career" | "skills" | "edu" | "etc";
-
-export type ResumeDetail = { label: string; content: string | React.JSX.Element };
+export type MenuType = "home" | "career" | "personal" | "skills" | "edu" | "etc";
 
 export interface ResumeSection {
   key: MenuType;
   title: string;
   content: string | React.JSX.Element;
-  details?: { label: string; content: string | React.JSX.Element }[];
 }
 
-export type MenuItem = ResumeSection;
+// 기존 타입들 (하위 호환성을 위해 유지)
+export interface MenuItem {
+  key: string;
+  title: string;
+  content: string | React.JSX.Element;
+  details?: { key: string; label: string; content: string | React.JSX.Element }[];
+}
 
-export type SelectedMenu = {
+export interface SelectedMenu {
   idx: number;
   detail: number | null;
-};
+}

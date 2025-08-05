@@ -96,7 +96,7 @@ const HomePage: React.FC<HomePageProps> = ({
           />
           <div className="flex-1">
             <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight">{personalInfo.name}</h1>
-            <p className="text-xl text-slate-500 mt-2">AI Developer & Data Analyst</p>
+            <p className="text-xl text-slate-500 mt-2">실전 경험을 바탕으로 실질적인 가치를 만들겠습니다.</p>
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-6 text-slate-600">
               <a href={`mailto:${personalInfo.email}`} className="flex items-center space-x-2.5 group">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-400 group-hover:text-blue-600 transition" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>

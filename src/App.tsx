@@ -8,11 +8,46 @@ import type { ResumeSection, MenuType, Message } from "./types.tsx";
 import HomePage from './data/HomePage'; 
 import WelcomeAnimation from './WelcomeAnimation';
 
+// 통합된 개인정보 섹션 생성
+const personalInfoSection: ResumeSection = {
+  key: "personal" as MenuType,
+  title: "기타 사항",
+  content: (
+    <div className="space-y-8">
+      <section>
+        <h2 className="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-blue-200 pb-2">주요 기술/스택</h2>
+        <div className="prose prose-lg max-w-none prose-slate">
+          {skillsSection.content}
+        </div>
+      </section>
+      
+      <section>
+        <h2 className="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-blue-200 pb-2">학력/자격</h2>
+        <div className="prose prose-lg max-w-none prose-slate">
+          {eduSection.content}
+        </div>
+      </section>
+      
+      <section>
+        <h2 className="text-2xl font-bold text-slate-800 mb-4 border-b-2 border-blue-200 pb-2">기타(수상/활동)</h2>
+        <div className="prose prose-lg max-w-none prose-slate">
+          {etcSection.content}
+        </div>
+      </section>
+    </div>
+  )
+};
+
+// 경력 섹션에서 details 제거
+const simplifiedCareerSection: ResumeSection = {
+  key: "career",
+  title: "경력/프로젝트",
+  content: careerSection.content
+};
+
 const resumeSections: ResumeSection[] = [
-  careerSection,
-  skillsSection,
-  eduSection,
-  etcSection,
+  simplifiedCareerSection,
+  personalInfoSection,
 ];
 
 // --- Sidebar 컴포넌트 ---
@@ -22,13 +57,11 @@ const Sidebar: React.FC<{
   open: boolean;
   setOpen: (v: boolean) => void;
   sections: ResumeSection[];
-  selectedDetail: number | null;
-  setSelectedDetail: (idx: number | null) => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   isPinned: boolean;
   onPinToggle: () => void;
-}> = ({ menu, setMenu, open, setOpen, sections, selectedDetail, setSelectedDetail, onMouseEnter, onMouseLeave, isPinned, onPinToggle }) => {
+}> = ({ menu, setMenu, open, setOpen, sections, onMouseEnter, onMouseLeave, isPinned, onPinToggle }) => {
   
   const getMenuItemClass = (itemKey: MenuType) => 
     `w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-base font-medium flex items-center space-x-3 ${
@@ -36,17 +69,9 @@ const Sidebar: React.FC<{
       ? 'bg-blue-600 text-white font-semibold shadow-md' 
       : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
     }`;
-
-  const getDetailItemClass = (index: number) => 
-    `w-full text-left pl-10 pr-4 py-2 rounded-md transition-colors duration-200 text-sm ${
-      selectedDetail === index
-      ? 'text-blue-600 font-bold'
-      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
-    }`;
   
-  const handleMenuClick = (menuType: MenuType, detailIndex: number | null = null) => {
+  const handleMenuClick = (menuType: MenuType) => {
     setMenu(menuType);
-    setSelectedDetail(detailIndex);
     if (!isPinned) {
       setOpen(false);
     }
@@ -82,20 +107,9 @@ const Sidebar: React.FC<{
           프로필 및 Q&A
         </button>
         {sections.map((sec) => (
-          <div key={sec.key}>
-            <button className={getMenuItemClass(sec.key)} onClick={() => handleMenuClick(sec.key)}>
-              {sec.title}
-            </button>
-            {sec.key === "career" && menu === "career" && sec.details && (
-              <div className="mt-2 space-y-1">
-                {sec.details.map((detail, idx) => (
-                  <button key={detail.label} className={getDetailItemClass(idx)} onClick={() => handleMenuClick(sec.key, idx)}>
-                    {detail.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          <button key={sec.key} className={getMenuItemClass(sec.key)} onClick={() => handleMenuClick(sec.key)}>
+            {sec.title}
+          </button>
         ))}
       </nav>
     </aside>
@@ -107,7 +121,6 @@ const App: React.FC = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [isPinned, setIsPinned] = useState<boolean>(false);
-  const [selectedDetail, setSelectedDetail] = useState<number | null>(null);
   const [menu, setMenu] = useState<MenuType>("home");
 
   // 대화 기록과 채팅 확장 상태를 App 컴포넌트에서 관리합니다.
@@ -149,9 +162,6 @@ const App: React.FC = () => {
   const getCurrentTitle = () => {
     if (menu === 'home') return '프로필 및 Q&A';
     const section = resumeSections.find(sec => sec.key === menu);
-    if (section && menu === 'career' && selectedDetail !== null) {
-      return section.details?.[selectedDetail]?.label || section.title;
-    }
     return section?.title || '';
   }
 
@@ -173,8 +183,6 @@ const App: React.FC = () => {
         open={sidebarOpen || isPinned}
         setOpen={setSidebarOpen}
         sections={resumeSections}
-        selectedDetail={selectedDetail}
-        setSelectedDetail={setSelectedDetail}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         isPinned={isPinned}
@@ -210,9 +218,7 @@ const App: React.FC = () => {
             ) : (
               <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 w-full max-w-4xl mx-auto">
                 <div className="prose prose-lg max-w-none prose-slate">
-                  {menu === "career" && selectedDetail !== null
-                    ? resumeSections.find((sec) => sec.key === "career")!.details![selectedDetail].content
-                    : resumeSections.find((sec) => sec.key === menu)?.content}
+                  {resumeSections.find((sec) => sec.key === menu)?.content}
                 </div>
               </div>
             )}

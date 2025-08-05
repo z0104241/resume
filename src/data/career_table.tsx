@@ -1,5 +1,3 @@
-// src/data/career_table.tsx
-
 const CareerTable = () => (
   <div className="overflow-x-auto bg-white rounded-lg">
     <table className="min-w-full w-full text-sm text-left text-gray-600">
@@ -14,53 +12,74 @@ const CareerTable = () => (
       </thead>
       <tbody className="divide-y divide-gray-200">
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">한국산업기술진흥원 DX전략 및 AI재차화 지원사업 컨설팅 용역</td>
-          <td className="px-6 py-4">2024.08 ~<br/>2024.12</td>
-          <td className="px-6 py-4">참여연구원</td>
-          <td className="px-6 py-4">한국생산성본부</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">Serverless RAG 기반의 AI 이력서 챗봇 시스템 개발</td>
+          <td className="px-6 py-4">2025.07 ~<br/>2025.08</td>
+          <td className="px-6 py-4">풀스택 개발</td>
+          <td className="px-6 py-4">개인 프로젝트</td>
+          <td className="px-6 py-4">React, AWS, LangChain 등</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">빅데이터 분석체계 및 차세대 IQIS ISMP 사업 용역</td>
+          <td className="px-6 py-4 whitespace-nowrap">자사 인적성 검사 서비스 개발</td>
+          <td className="px-6 py-4">2025.02 ~<br/>2025.06</td>
+          <td className="px-6 py-4">백엔드 및 DB 설계</td>
+          <td className="px-6 py-4">사내 프로젝트</td>
+          <td className="px-6 py-4">SQL, EC2, 알고리즘 등</td>
+        </tr>
+        <tr className="hover:bg-gray-50 transition-colors">
+          <td className="px-6 py-4 whitespace-nowrap">문장 순서 배열 AI 경진대회</td>
+          <td className="px-6 py-4">2025.05 ~<br/>2025.06</td>
+          <td className="px-6 py-4">LLM 파인튜닝 및 제출 자동화</td>
+          <td className="px-6 py-4">개인 참여</td>
+          <td className="px-6 py-4">QLoRA, Gemma, PEFT</td>
+        </tr>
+        <tr className="hover:bg-gray-50 transition-colors">
+          <td className="px-6 py-4 whitespace-nowrap">AI 기반 유사 제안요청서 분석 시스템</td>
+          <td className="px-6 py-4">2024.04 ~<br/>2024.07</td>
+          <td className="px-6 py-4">RAG 파이프라인 구축</td>
+          <td className="px-6 py-4">사내 프로젝트</td>
+          <td className="px-6 py-4">LangChain, docling</td>
+        </tr>
+        <tr className="hover:bg-gray-50 transition-colors">
+          <td className="px-6 py-4 whitespace-nowrap">동일/유사무기 체계 분석</td>
           <td className="px-6 py-4">2023.09 ~<br/>2024.02</td>
-          <td className="px-6 py-4">참여연구원</td>
-          <td className="px-6 py-4">국가기술표준원</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4">유사도 분석 및 MLOps 구축</td>
+          <td className="px-6 py-4">SI</td>
+          <td className="px-6 py-4">Node2Vec, SBERT</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">국가기술표준원 빅데이터 분석과제 개념검증(PoC) 용역</td>
-          <td className="px-6 py-4">2023.02 ~<br/>2023.05</td>
-          <td className="px-6 py-4">참여연구원</td>
-          <td className="px-6 py-4">국가기술표준원</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">국방기술품질원 상주 사업</td>
+          <td className="px-6 py-4">2023.02 ~<br/>2024.02</td>
+          <td className="px-6 py-4">서버 셋업 및 보안 관리</td>
+          <td className="px-6 py-4">SI</td>
+          <td className="px-6 py-4">Ubuntu, SSH</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">재정데이터분석전문가(FDS) 양성과정 교육 콘텐츠 개편</td>
-          <td className="px-6 py-4">2022.11 ~<br/>2022.12</td>
-          <td className="px-6 py-4">참여연구원</td>
-          <td className="px-6 py-4">한국재정정보원</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">품보형태 자동 추천</td>
+          <td className="px-6 py-4">2023.02 ~<br/>2023.06</td>
+          <td className="px-6 py-4">시계열 분석 및 군집화</td>
+          <td className="px-6 py-4">SI</td>
+          <td className="px-6 py-4">PoC, Forecasting</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">빅데이터 분석기능 컨설팅</td>
-          <td className="px-6 py-4">2022.09 ~<br/>2022.10</td>
-          <td className="px-6 py-4">참여연구원</td>
-          <td className="px-6 py-4">엔티데이터 주식회사</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">수산자원 증대사업 효과분석</td>
+          <td className="px-6 py-4">2022.06 ~<br/>2022.12</td>
+          <td className="px-6 py-4">모델링 및 예측</td>
+          <td className="px-6 py-4">SI</td>
+          <td className="px-6 py-4">SARIMA, LSTM</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">공공 빅데이터 분석 일 경험 수련생</td>
-          <td className="px-6 py-4">2021.09 ~<br/>2022.02</td>
-          <td className="px-6 py-4">인턴</td>
-          <td className="px-6 py-4">한국정보화진흥원</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">Cartoon Face Generation 연구</td>
+          <td className="px-6 py-4">2022.09 ~<br/>2022.11</td>
+          <td className="px-6 py-4">GAN 기반 이미지 생성</td>
+          <td className="px-6 py-4">개인 연구</td>
+          <td className="px-6 py-4">StyleGAN2-ADA</td>
         </tr>
         <tr className="hover:bg-gray-50 transition-colors">
-          <td className="px-6 py-4 whitespace-nowrap">서울시 복지 불균형 완화를 위한 노인복지시설 중복분석 최적 입지 분석</td>
-          <td className="px-6 py-4">2020</td>
-          <td className="px-6 py-4">팀원</td>
-          <td className="px-6 py-4">한국정보화진흥원</td>
-          <td className="px-6 py-4">-</td>
+          <td className="px-6 py-4 whitespace-nowrap">배달 플랫폼 리뷰 데이터 분석</td>
+          <td className="px-6 py-4">2021.03 ~<br/>2021.07</td>
+          <td className="px-6 py-4">텍스트 마이닝 및 모델링</td>
+          <td className="px-6 py-4">학부 프로젝트</td>
+          <td className="px-6 py-4">TF-IDF, DNN</td>
         </tr>
       </tbody>
     </table>
